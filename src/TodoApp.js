@@ -31,7 +31,7 @@ handleClick = async() => {
 
     const newTodos = [...this.state.todos, newTodo];
 
-    this.setStaate({ todos: newTodos });
+    this.setState({ todos: newTodos });
     
      //call post route and update state with new todo item
     const data = await request.post(`https://cryptic-coast-58268.herokuapp.com/api/todos`, 
@@ -44,7 +44,6 @@ handleInput = (e) => { this.setState({  todoInput: e.target.value})};
 
     render() {
        
-
         return (
             <div>
                 <header> To Do List!</header>
@@ -52,6 +51,12 @@ handleInput = (e) => { this.setState({  todoInput: e.target.value})};
                 <main>
                     <div>
                         <AddTodo todoInput={ this.state.todoInput } handleClick={ this.handleClick } handleInput={ this.handleInput } />
+
+                        { this.state.todos.map((todo) => <p style={{
+                            textDecoration: todo.complete ? 'line-through' : 'none' }}
+                        )
+
+                        }
 
                         
                     </div>
