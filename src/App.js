@@ -3,26 +3,36 @@ import TodoApp from './TodoApp.js';
 import './App.css';
 import { 
     Route,  
-    Switch,
-    Link, 
-    //may need to add redirect too
+    Switch, 
+    Redirect,
     BrowserRouter as Router, 
 } from 'react-router-dom';
+import UserLogin from './UserLogin.js';
 
+
+const userIsSignedIn = () => JSON.parse(localStorage.getItem('user'));
 
 export default class App extends Component {
   render() {
     return (
-      <Router>
-        <div>
-          <Switch>
-            <Route exact path="/:storedTodos?" component={TodoApp} />
+      <div>
+        <header>
+          <h2>Welcome to the ToDo App!</h2>
+        </header>
 
-          </Switch>
-          
-        </div>
-      </Router>
-    )
+        <Router>
+            <Switch>
+              <Route exact path='/' render={() =>
+              userIsSignedIn()
+                ? <TodoApp />
+                : <Redirect to='login' />
+              } />
+
+              <Route path='/login' component={UserLogin} />
+            </Switch>
+        </Router>
+      </div>
+    );
   }
 }
 

@@ -32,16 +32,24 @@ export default class UserLogin extends Component {
 
     render() {
         return (
-            <div>
+            <div className='userInputContainer'>
+                <div className='signup-div'>
+                <label>Email </label>
                 <input value={ this.state.userSignUp } onChange={(e) => this.setState({ userSignUp: e.target.value})} />
+                <label>Password </label>
                 <input value={ this.state.passwordSignUp } onChange={(e) => this.setState({passwordSignUp: e.target.value})} />
 
                 <button onClick={ this.handleSignUp }> Sign Up Here!</button>
+                </div>
 
+                <div className='signin-div'>
+                <label>Email </label>
                 <input value={ this.state.userSignIn } onChange={(e) => this.setState({ userSignIn: e.target.value})} />
+                <label>Password </label>
                 <input value={ this.state.passwordSignIn } onChange={(e) => this.setState({passwordSignIn: e.target.value})} />
 
                 <button onClick={ this.handleSignIn }> Returning Users Sign In Here!</button>
+                </div>
 
             </div>
         )
