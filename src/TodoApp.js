@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { getTodoData } from './TodoAPI.js'
-// import AddTodo from './AddTodo.js';
+import request from 'superagent';
+import AddTodo from './AddTodo.js';
  
 export default class TodoApp extends Component {
     //set global state for todos here
@@ -11,7 +12,7 @@ export default class TodoApp extends Component {
     //add componentDidMount and get Todo data
     async componentDidMount() {
         //hit get route from API using deployed Heroku 
-        const todoData = await (getTodoData);
+        const todoData = await getTodoData();
 
         console.log(todoData.body);
 
@@ -21,9 +22,25 @@ export default class TodoApp extends Component {
 
 
     //add handleClick function for new Todo
-    //call post route and update state with new todo item
+handleClick = async() => {
+    const newTodo = {
+        id: Math.random()*100,
+        task: this.state.todoInput, 
+        complete: false,
+    };
+
+    const newTodos = [...this.state.todos, newTodo];
+
+    this.setStaate({ todos: newTodos });
+    
+     //call post route and update state with new todo item
+    const data = await request.post(`https://cryptic-coast-58268.herokuapp.com/api/todos`, 
+        { task: this.state.todoInput })
+}
 
     //add  handleInput to store new todo input
+handleInput = (e) => { this.setState({  todoInput: e.target.value})};
+
 
     render() {
        
@@ -34,15 +51,13 @@ export default class TodoApp extends Component {
 
                 <main>
                     <div>
-                        {this.state.storedTodos.map(eachTodo =>
-                            <p></p> )}
+                        <AddTodo todoInput={ this.state.todoInput } handleClick={ this.handleClick } handleInput={ this.handleInput } />
+
+                        
                     </div>
 
                 </main>
-                 {/* //map over todos 
-        //onClick mark todo as complete and update state
-        
-        //call put route to update todo data */}
+               
                 
             </div>
         )

@@ -5,8 +5,8 @@ export default class AddTodo extends Component {
         return (
             <fieldset>
                 <form>
-                    <input value= onChange= />
-                    <button onClick= >Add todo! </button>
+                    <input value={ this.props.todoInput } onChange={ this.props.handleInput } />
+                    <button onClick={ this.props.handleClick } >Add todo! </button>
                 </form>
             </fieldset>
         )
