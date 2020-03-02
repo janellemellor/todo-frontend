@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 export default class AddTodo extends Component {
     render() {
@@ -9,6 +9,6 @@ export default class AddTodo extends Component {
                     <button onClick={ this.props.handleClick } >Add todo! </button>
                 </form>
             </fieldset>
-        )
+        );
     }
 }
